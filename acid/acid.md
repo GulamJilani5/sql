@@ -1,8 +1,9 @@
-🟩🟢🔷
+🔵🟢🔴➡️⭕🟠🟦🟣🟥🟧✔️⏺️ ☑️ • ‣ → ⁕
 
 # 🟩 ACID
 
-It’s a set of properties that ensure reliable and predictable database transactions
+- Regarding ACID I have been asked in the Epam interview.
+  It’s a set of properties that ensure reliable and predictable database transactions
 
 ### 🟢 1. Atomicity
 
