@@ -1,5 +1,108 @@
 ⏺️ ➡️ 🟦 🔵🟢🔴⭕🟠🟣🟥🟧✔️ ☑️ • ‣ → ⁕
 
+# ⏺️ Data Types in Postgresql
+
+### ➡️ Numeric Types
+
+- `SMALLINT`
+- `INT / INTEGER`
+- `BIGINT`
+- `SERIAL`
+- `BIGSERIAL`
+- `NUMERIC(p,s) / DECIMAL(p,s)`
+- `REAL`
+- `DOUBLE PRECISION`
+
+```sql
+
+```
+
+### ➡️ Character / String Types
+
+- `CHAR(n)`
+- `VARCHAR(n)`
+- `TEXT`
+
+```sql
+
+```
+
+### ➡️ Boolean Type
+
+`BOOLEAN`
+
+```sql
+
+```
+
+### ➡️ Date & Time Types
+
+- `DATE`
+- `TIME`
+- `TIMESTAMP`
+- `TIMESTAMP WITH TIME ZONE (timestamptz)`
+- `INTERVAL`
+
+```sql
+
+```
+
+### ➡️ UUID Type
+
+- `UUID`
+
+```sql
+
+```
+
+### ➡️ Binary Data
+
+- `BYTEA`
+
+```sql
+
+```
+
+### ➡️ JSON Types
+
+- `JSON`
+- `JSONB`
+
+```sql
+
+```
+
+### ➡️ Network Address Types
+
+- `INET`
+- `CIDR`
+- `MACADDR`
+
+```sql
+
+```
+
+### ➡️ Arrays
+
+- `INTEGER[]`
+- `TEXT[]`
+- `VARCHAR[]`
+
+```sql
+
+```
+
+### ➡️ Special / Advanced Types
+
+- `ENUM (custom type)`
+- `HSTORE (key-value)`
+- `XML`
+- `TSVECTOR (full text search)`
+
+```sql
+
+```
+
 # ⏺️ Creating Table, Inserting Values, DELETE, TRUNCATE, DROP
 
 ### ➡️ Creating Table
