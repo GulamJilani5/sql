@@ -132,6 +132,41 @@ VALUES
 ('John', '2001-08-15');
 ```
 
+### ➡️ UPDATE
+
+##### 🟦 Update one column
+
+```sql
+UPDATE users
+SET username = 'Ahmed'
+WHERE id = 1;
+```
+
+##### 🟦 Update multiple columns
+
+```sql
+UPDATE users
+SET username = 'Sara',
+    dob = '2002-10-15'
+WHERE id = 2;
+
+```
+
+##### 🟦 Update all rows (Danger ⚠️)
+
+- no `WHERE` means all rows will be updated
+
+```sql
+UPDATE users
+SET dob = '2000-01-01';
+```
+
+##### 🟦
+
+```sql
+
+```
+
 ### ➡️ DELETE
 
 - Removes rows (data) from a table
@@ -171,12 +206,6 @@ DELETE FROM users_new;
 
 ```sql
 DROP TABLE users;
-
-```
-
-### ➡️
-
-```sql
 
 ```
 
