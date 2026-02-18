@@ -2,13 +2,13 @@
 
 # ⏺️ Join Types
 
-## ➡️ INNER JOIN: Only Matching Rows from All Tables
+## ➡️ INNER JOIN(INNER OUTER JOIN): Only Matching Rows from All Tables
 
 - **What it does:** Returns only rows where there's a match in every table. Non-matches are completely excluded—like a strict group `photo` where everyone must show up.
 - **When to use:** For complete records (**e.g.**, `photos` with `comments` from known `users`).
 - Syntax (chaining multiple **INNER JOINs**):
 
-```
+```sql
     SELECT u.username AS uploader, p.caption AS photo, c.comment_text AS comment
     FROM users u
     INNER JOIN photos p ON u.id = p.user_id
@@ -30,12 +30,12 @@
 
 - **Excluded:** **Bob** (no `photos`), **Carol's** `photo` (no `comments`).
 
-## ➡️ LEFT JOIN: All from the "Left" Table(s), Matches from the Right
+## ➡️ LEFT JOIN(LEFT OUTER JOIN): All from the "Left" Table(s), Matches from the Right
 
 - **What it does:** Returns all rows from the leftmost table (users here), plus matching rows from the others. Non-matches get `NULL` in right-table columns — like inviting all users to a party, but only showing photo/comment details if they exist.
 - **When to use:** To list all users/photos, even without comments (e.g., "All uploads, commented or not").
 
-```
+```sql
     SELECT u.username AS uploader, p.caption AS photo, c.comment_text AS comment
     FROM users u
     LEFT JOIN photos p ON u.id = p.user_id
@@ -59,13 +59,13 @@
 
 - Multiple comments per photo create duplicate rows for that photo.
 
-## ➡️ RIGHT JOIN: All from the "Right" Table(s), Matches from the Left
+## ➡️ RIGHT JOIN (RIGHT OUTER JOIN): All from the "Right" Table(s), Matches from the Left
 
 - **What it does:** Opposite of LEFT—returns all rows from the rightmost table (comments here), plus matching rows from the left. Non-matches get NULL in left-table columns—like focusing on every comment, even if the `photo/user` details are missing (rare, but useful for orphaned data).
 - **When to use:** To ensure all comments are included, regardless of `photo/user` issues (e.g., auditing stray comments).
 - **Syntax** (chain with RIGHT JOINs; order matters—comments as "right"):
 
-```
+```sql
     SELECT u.username AS uploader, p.caption AS photo, c.comment_text AS comment
     FROM users u
     RIGHT JOIN photos p ON u.id = p.user_id
@@ -98,12 +98,12 @@
 
 - **Excluded:** Users without `photos/comments` (**Bob**, **Carol's** `photo`).
 
-## ➡️ FULL OUTER JOIN: Everything from All Tables
+## ➡️ FULL JOIN(FULL OUTER JOIN): Everything from All Tables
 
 - **What it does:** Returns all rows from every table. Matches combine; non-matches get NULL in the missing table's columns—like a massive reunion where everyone is listed, with blanks for no-shows.
 - **When to use:** For a full audit (e.g., "All users, photos, and comments—spot the gaps!").
 
-```
+```sql
     SELECT u.username AS uploader, p.caption AS photo, c.comment_text AS comment
     FROM users u
     FULL OUTER JOIN photos p ON u.id = p.user_id
@@ -114,7 +114,7 @@
 
 - **Result**
 
-```
+```sql
 | uploader | photo         | comment         |
 | -------- | ------------- | --------------- |
 | alice    | Beach sunset  | Love this view! |
@@ -127,3 +127,20 @@
 
 - If orphan comment added: Extra row with `NULL` | `NULL` | `Orphan comment`!
 - **Note:** Results may vary in order; use `ORDER BY` for consistency.
+
+## ➡️ SELF JOIN
+
+- Join a table with itself.
+- Example: if `user_new` had `referrer_id` column.
+
+```sql
+SELECT u1.name AS user_name, u2.name AS referred_by
+FROM user_new u1
+LEFT JOIN user_new u2
+ON u1.referrer_id = u2.id;
+```
+
+## ➡️ CROSS JOIN
+
+- Cartesian product (every row of A joins with every row of B)
+- Rarely used in real apps.
