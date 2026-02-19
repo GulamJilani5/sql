@@ -40,8 +40,10 @@
 ```sql
     SELECT u.username AS uploader, p.caption AS photo, c.comment_text AS comment
     FROM users u
-    LEFT JOIN photos p ON u.id = p.user_id
-    LEFT JOIN comments c ON p.id = c.photo_id;
+    LEFT JOIN photos p
+     ON u.id = p.user_id
+    LEFT JOIN comments c
+     ON p.id = c.photo_id;
 ```
 
 - **How it works:** Prioritizes users → adds photos if match → adds comments if match. Bob and Carol's photo appear with `NULLs`.
@@ -70,8 +72,10 @@
 ```sql
     SELECT u.username AS uploader, p.caption AS photo, c.comment_text AS comment
     FROM users u
-    RIGHT JOIN photos p ON u.id = p.user_id
-    RIGHT JOIN comments c ON p.id = c.photo_id;
+    RIGHT JOIN photos p
+     ON u.id = p.user_id
+    RIGHT JOIN comments c
+     ON p.id = c.photo_id;
 ```
 
 - **How it works:** Prioritizes comments → adds photos if match → adds users if match. All comments show; if there were a "orphan" comment (e.g., `photo_id=999`), it'd have `NULL` for `uploader/photo`.
@@ -108,8 +112,10 @@
 ```sql
     SELECT u.username AS uploader, p.caption AS photo, c.comment_text AS comment
     FROM users u
-    FULL OUTER JOIN photos p ON u.id = p.user_id
-    FULL OUTER JOIN comments c ON p.id = c.photo_id;
+    FULL OUTER JOIN photos p
+     ON u.id = p.user_id
+    FULL OUTER JOIN comments c
+     ON p.id = c.photo_id;
 ```
 
 - **How it works:** Combines all uniquely—users without `photos/comments` get `NULL` there; `photos` without `comments` get `NULL` for `comments`; `comments` without `photos/users` get `NULL` for those (though **FKs** prevent true orphans).
@@ -139,7 +145,7 @@
 SELECT u1.name AS user_name, u2.name AS referred_by
 FROM user_new u1
 LEFT JOIN user_new u2
-ON u1.referrer_id = u2.id;
+ ON u1.referrer_id = u2.id;
 ```
 
 ## ➡️ CROSS JOIN
