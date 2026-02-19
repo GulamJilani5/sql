@@ -11,8 +11,10 @@
 ```sql
     SELECT u.username AS uploader, p.caption AS photo, c.comment_text AS comment
     FROM users u
-    INNER JOIN photos p ON u.id = p.user_id
-    INNER JOIN comments c ON p.id = c.photo_id;
+    INNER JOIN photos p
+    ON u.id = p.user_id
+    INNER JOIN comments c
+    ON p.id = c.photo_id;
 ```
 
 - Starts with users → matches photos (`u.id = p.user_id`) → matches comments (`p.id = c.photo_id`). Only Alice's photos with comments survive.
