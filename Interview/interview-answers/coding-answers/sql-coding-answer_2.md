@@ -4,7 +4,14 @@
 
 ### 🟦 Total extra duplicate rows, Excludes the first occurrence
 
-- **EXISTS:** Total number of extra duplicate rows
+**EXISTS:** Total number of extra duplicate rows
+
+- All duplicate rows except the first occurrence
+- correlated subquery
+
+```sql
+WHERE EXISTS ( subquery )
+```
 
 ```sql
 SELECT COUNT(*) AS extra_duplicates
@@ -17,7 +24,18 @@ WHERE EXISTS (
 );
 ```
 
-- **SUM(count - 1):** How many extra duplicate rows (excluding original)?
+- Execution order conceptually:
+  - Take first row of e1
+  - Run subquery using that row’s values
+  - Check EXISTS
+  - Move to next row
+  - Repeat
+
+##### 🔵 **SUM(count - 1):** How many extra duplicate rows exist in total(excluding original)?
+
+- When you put a subquery inside `FROM`,
+- you MUST give it an alias. 🔴
+- here alias name is sub;
 
 ```sql
 SELECT SUM(count - 1) AS extra_duplicates
@@ -29,6 +47,12 @@ FROM (
 ) sub;
 ```
 
+- Execution Order
+  - Run inner query first
+  - Get result set (counts)
+  - Treat it like a temporary table named sub
+  - Outer query runs on that result
+
 - **Duplicates:**
   - A → 3 rows → extra = 2
   - B → 2 rows → extra = 1
@@ -38,7 +62,7 @@ FROM (
 
 ### 🟦 Find Duplicate Email Values
 
-- **GROUP BY:** Duplicate values + their counts
+##### 🔵 **GROUP BY:** Duplicate values + their counts
 
 ```sql
 SELECT email, COUNT(*)
@@ -83,7 +107,7 @@ FROM (
 
 ### 🟦 Get Full Duplicate Rows
 
-- only shows the duplicate rows but it does NOT directly tell how many duplicates exist per value.
+- Only shows the duplicate rows but it does NOT directly tell how many duplicates exist per value.
 
 ```sql
 SELECT *
