@@ -10,7 +10,7 @@
 
 ##### 🟦 What is the difference between DELETE, TRUNCATE, DROP?
 
-##### 🟦
+##### 🟦 Operator In SQL
 
 ##### 🟦
 
