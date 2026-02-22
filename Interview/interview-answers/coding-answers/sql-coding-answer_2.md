@@ -125,7 +125,7 @@ FROM employees;
 
 # ➡️ Remove Duplicate Records
 
-### 🟦 Delete Using USING Clause
+### 🟦 Delete Using USING Clause(DELETE Duplicate records and Keep One Record)
 
 - `USING` is only in the Postgresql
 
@@ -137,6 +137,20 @@ AND e1.email = e2.email;
 ```
 
 - This keeps the lowest id and deletes others.
+
+### 🟦 Delete Using EXISTS Operator(DELETE Duplicate records and Keep One Record)
+
+```sql
+DELETE FROM employees e1
+WHERE EXISTS (
+    SELECT 1
+    FROM employees e2
+    WHERE e1.email = e2.email
+    AND e1.id > e2.id
+);
+```
+
+- - This keeps the lowest id and deletes others.
 
 ### 🟦 Keep One Record (Using CTE + ROW_NUMBER())
 
