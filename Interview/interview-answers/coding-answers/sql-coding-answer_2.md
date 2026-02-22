@@ -123,6 +123,25 @@ FROM employees;
 
 - This removes duplicate values from output.
 
+### 🟦 Count of Unique (Non-Duplicate)
+
+```sql
+SELECT COUNT(*)
+FROM (
+    SELECT email
+    FROM employees
+    GROUP BY email
+    HAVING COUNT(*) = 1
+) t;
+```
+
+### 🟦 Count of Distinct Emails (Regardless of Duplicates)
+
+```sql
+SELECT COUNT(DISTINCT email)
+FROM employees;
+```
+
 # ➡️ Remove Duplicate Records
 
 ### 🟦 Delete Using USING Clause(DELETE Duplicate records and Keep One Record)
