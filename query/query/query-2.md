@@ -1,6 +1,6 @@
 ⏺️ ➡️ 🟦 🔵🟢🔴⭕🟠🟣🟥🟧✔️ ☑️ • ‣ → ⁕
 
-# ⏺️ subquery
+# ⏺️ Subquery
 
 ## ➡️ Based on Execution
 
@@ -83,8 +83,8 @@ WHERE EXISTS (
 #### 🟦 Subquery in FROM (Derived Table)
 
 - subquery behaves like a temporary table.
-- Subquery in `FROM` must have an alias like `AS dept_avg` in below example.
 - Usually it is not correlated.
+- Subquery in `FROM` must have an alias like `AS dept_avg` in below example.
 
 ```sql
 SELECT dept_id, avg_salary

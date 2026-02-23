@@ -2,6 +2,31 @@
 
 # ➡️ Finding the duplicated records
 
+```sql
+CREATE TABLE employee (
+    email VARCHAR(100) PRIMARY KEY,
+    username VARCHAR(50),
+    salary DOUBLE PRECISION,
+    gender VARCHAR(10),
+    doj DATE
+);
+```
+
+### 🟦 Return duplicate records
+
+- for example all the records which has same email more than one will return here
+
+```sql
+SELECT *
+FROM employee
+WHERE email IN(
+	  SELECT email
+	  FROM employee
+	  GROUP By email
+	  HAVING COUNT(*) > 1
+)
+```
+
 ### 🟦 Total extra duplicate rows, Excludes the first occurrence
 
 **EXISTS:** Total number of extra duplicate rows
@@ -125,6 +150,8 @@ ORDER BY email;
 
 ### 🟦 Records That Appear Only Once
 
+- Only record which is having email only once, those having email more than one will be excluded.
+
 ```sql
 SELECT *
 FROM employees
@@ -138,7 +165,7 @@ WHERE email IN (
 
 - This gives records that are NOT duplicated.
 
-### 🟦 Get Only Distinct Values (Remove duplicates in result)
+### 🟦 Get Only Distinct emaail values (Remove duplicates in result)
 
 ```sql
 SELECT DISTINCT email
@@ -183,6 +210,9 @@ AND e1.email = e2.email;
 
 ### 🟦 Delete Using EXISTS Operator(DELETE Duplicate records and Keep One Record)
 
+- Keep One Record and DELETE other duplicated record, so only unique record will be there after this query
+- `EXISTS` works for all the sql.
+
 ```sql
 DELETE FROM employees e1
 WHERE EXISTS (
@@ -193,7 +223,7 @@ WHERE EXISTS (
 );
 ```
 
-- - This keeps the lowest id and deletes others.
+- This keeps the lowest id and deletes others.
 
 ### 🟦 Keep One Record (Using CTE + ROW_NUMBER())
 

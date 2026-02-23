@@ -152,6 +152,13 @@ WHERE id = 2;
 
 ```
 
+##### 🟦 Change the field/column name
+
+```sql
+ALTER TABLE employee
+RENAME COLUMN dob TO doj;
+```
+
 ##### 🟦 Update all rows (Danger ⚠️)
 
 - no `WHERE` means all rows will be updated
