@@ -1,5 +1,18 @@
------************
-------CREATE TABLE
+/***********************************************************************
+Table Of Content
+   - CRUD Operation
+   - Update table fileds name, type and value.
+   - Subquery understanding
+         `D:\Jilani\learning\sql\query\query\query-2.md`
+   - Some of the interview questions
+		   `D:\Jilani\learning\sql\Interview\interview-answers\coding-answers\sql-coding-answer_2.md`
+
+
+*************************************************************************/
+
+
+-----*******************************************
+------ CREATE TABLE
 CREATE TABLE employee (
      
     email VARCHAR(100) PRIMARY KEY,
@@ -10,8 +23,8 @@ CREATE TABLE employee (
 );
 ------
 
------************
----- UPDATE Fields and Filed's Value
+-----*******************************************
+---- UPDATE Fields name and Filed's Value
 ALTER TABLE employee
 RENAME COLUMN dob TO doj;
 
@@ -26,7 +39,7 @@ SET gender = 'Male'
 WHERE email = 'john.doe@gmail.com';
 --------
 
------************
+-----*******************************************
 ----- INSERT INTO TABLE
 INSERT INTO employee (email, username, salary, gender, doj)
 VALUES 
@@ -49,7 +62,8 @@ VALUES
 
 SELECT * FROM employee;
 
------************
+
+-----*******************************************
 ------ Total extra duplicate rows, Excludes the first occurrence
 SELECT COUNT(*) AS extra_duplicates
 FROM employee e1
@@ -61,7 +75,7 @@ WHERE EXISTS (
 );
 --
 
------************
+-----*******************************************
 -- Unique rows based on email, so only email per row, exclude the row which has email more than once(duplicate email)
 SELECT * 
 FROM employee
@@ -76,7 +90,7 @@ SELECT DISTINCT email
 FROM employee;
 --
 
------************
+-----*******************************************
 -- Duplicate rows based on email, so gets row which appears more than once based on email
 SELECT * 
 FROM employee
@@ -93,7 +107,7 @@ GROUP By email
 HAVING COUNT(*) > 1
 --
 
------************
+-----*******************************************
 -- Keep One Record and DELETE other duplicated record, so only unique record will be there after this query 
 DELETE FROM employee e1
 WHERE EXISTS (
@@ -103,6 +117,7 @@ WHERE EXISTS (
     AND e1.id > e2.id
 );
 
+--------
 
 
 
