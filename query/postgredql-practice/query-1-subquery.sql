@@ -5,7 +5,7 @@ Table Of Content
    - Subquery understanding
          `D:\Jilani\learning\sql\query\query\query-2.md`
    - Some of the interview questions
-		   `D:\Jilani\learning\sql\Interview\interview-answers\coding-answers\sql-coding-answer_2.md`
+		 `D:\Jilani\learning\sql\Interview\interview-answers\coding-answers\sql-coding-answer_2.md`
 
 
 *************************************************************************/

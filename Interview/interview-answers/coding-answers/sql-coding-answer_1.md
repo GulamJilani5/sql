@@ -38,6 +38,9 @@ LIMIT 1;
 
 ##### 🟦 Way 2: Subquery with MAX
 
+- But since `MAX()` only cares about the largest value,
+  duplicates don’t change the result.
+
 ```sql
 SELECT MAX(salary) AS second_highest_salary
 FROM employee
