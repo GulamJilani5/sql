@@ -1,36 +1,27 @@
 ⏺️ ➡️ 🟦 🔵 🟢 🔴 ⭕🟠🟣🟥🟧✔️ ☑️ • ‣ → ⁕
 
-# ⏺️ SQL Coding Questions
+# ⏺️ Most Important SQL Query Questions
 
-## ➡️ Find students and teacher name from pune studying in class 10 section c and subject in Math.
+### ➡️ Finding the second highest salary value of the given table in the sql query using postgresql.
 
-- Student(id,name,classsId, address,subjectId)
-- Class(classId, roomNo, class)
-- Section(sectionId,section,roomNo)
-- Subject(subjectId,subject, teacher)
+##### 🟦 Fetch employee details with 2nd highest salary
 
-#### - ** Yash Technology **
+##### 🟦 Nth highest salary
 
-- Find Answer: `D:\Jilani\learning\sql\Interview\interview-answers\sql-answers_1.md`
+- Find `D:\Jilani\learning\sql\query\query\query-concepts\second-highest-salary\second-highest-salary.md`
 
-## ➡️ finding the second highest salary value of the given table in the sql query using postgresql.
+### ➡️ Unique & Duplicated records related Questions.
 
-## ➡️ You have two tables. Write a query using INNER JOIN to retrieve data. You can use any example data for this.
+##### 🟦 Find duplicates records
 
-## ➡️ You have a user table with 50 records. Write a query to retrieve 20 records starting from the 5th row. The result should include the user's first name and last name.
+- How many duplicate records are there
+- How many extra duplicate rows (excluding original)?
+- Find `D:\Jilani\learning\sql\query\query\query-concepts\unique-duplicate-record\duplicate-record.md`
 
-## ➡️
+##### 🟦 Remove Duplicate Records
 
-## ➡️
+- Find `D:\Jilani\learning\sql\query\query\query-concepts\unique-duplicate-record\duplicate-record.md`
 
-## ➡️
+##### 🟦 Find Unique Records
 
-## ➡️
-
-## ➡️
-
-## ➡️
-
-## ➡️
-
-## ➡️
+- Find `D:\Jilani\learning\sql\query\query\query-concepts\unique-duplicate-record\unique-record.md`

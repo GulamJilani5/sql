@@ -1,10 +1,5 @@
 ⏺️ ➡️ 🟦 🔵 🟢 🔴 ⭕🟠🟣🟥🟧✔️ ☑️ • ‣ → ⁕
 
-⏺️ ➡️ 🟦 🔵
-⏺️ ➡️ 🟦 🔵
-⏺️ ➡️ 🟦 🔵
-⏺️ ➡️ 🟦 🔵
-
 ## ➡️ What are Indexes in databases? Types (clustered vs non-clustered)
 
 - Find `D:\Jilani\learning\system design\typeofsystems\databasepattern\indexing.md`

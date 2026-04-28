@@ -1,10 +1,16 @@
 ⏺️ ➡️ 🟦 🔵 🟢 🔴 ⭕🟠🟣🟥🟧✔️ ☑️ • ‣ → ⁕
 
-## ➡️ Finding the duplicated records in a table. How many duplicates records are there in the table
+# ⏺️ Joins Related Question
 
-- How many duplicate records are there
-- How many extra duplicate rows (excluding original)?
+### ➡️ Find students and teacher name from pune studying in class 10 section c and subject in Math.
 
-## ➡️ Find Unique Records
+Yash Technology 🔴
 
-## ➡️ Remove Duplicate Records
+- Student(id,name,classsId, address,subjectId)
+- Class(classId, roomNo, class)
+- Section(sectionId,section,roomNo)
+- Subject(subjectId,subject, teacher)
+
+- Find Answer: `D:\Jilani\learning\sql\Interview\interview-answers\sql-answers_1.md`
+
+### ➡️ You have two tables. Write a query using INNER JOIN to retrieve data. You can use any example data for this.
