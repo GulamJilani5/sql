@@ -2,9 +2,23 @@
 
 # ⏺️ Find Unique Records
 
-### ➡️ Records That Appear Only Once
+```sql
+| id | name  | email       |
+| -- | ----- | ----------- |
+| 1  | Alice | a@gmail.com |
+| 2  | Bob   | b@gmail.com |
+| 3  | Carol | c@gmail.com |
+| 4  | Alice | a@gmail.com |
+| 5  | David | d@gmail.com |
+| 6  | Carol | c@gmail.com |
+| 7  | Carol | c@gmail.com |
+```
+
+### ➡️ Unqiue rows by email(Records That Appear Only Once)
 
 - Only record which is having email only once, those having email more than one will be excluded.
+- Final output wise `delete-duplicate.md` will give the same result. `Delete all rows which are duplicates(Get only unique records)`
+  - find `D:\Jilani\learning\sql\query\query\unique-duplicate-record\delete-duplicate.md`
 
 ```sql
 SELECT *
@@ -17,18 +31,30 @@ WHERE email IN (
 );
 ```
 
-- This gives records that are NOT duplicated.
-
-### ➡️ Get Only Distinct emaail values (Remove duplicates in result)
+- OR
 
 ```sql
-SELECT DISTINCT email
-FROM employees;
+SELECT *
+FROM employees emp
+WHERE emp.email IN (
+    SELECT email
+    FROM employees
+    GROUP BY email
+    HAVING COUNT(*) = 1
+)
+ORDER BY email;
 ```
 
-- This removes duplicate values from output.
+- This gives records that are unique(not duplicated) like Bob & David
 
-### ➡️ Count of Unique (Non-Duplicate)
+```sql
+| id | name  | email       |
+|----|-------|-------------|
+| 2  | Bob   | b@gmail.com |
+| 5  | David | d@gmail.com |
+```
+
+##### 🟦 Count
 
 ```sql
 SELECT COUNT(*)
@@ -40,103 +66,58 @@ FROM (
 ) t;
 ```
 
-### ➡️ Count of Distinct Emails (Regardless of Duplicates)
+```sql
+| count |
+|-------|
+| 2     |
+```
+
+### ➡️ Get Only Distinct email values (removing duplicated(extra) rows)
+
+- If Email occurs 3 times then delete other 2 and keep only once.
+- Final output wise `delete-duplicate.md` will give the same result. `removing duplicated(extra) rows (Get Only Distinct email values)`
+  - find `D:\Jilani\learning\sql\query\query\unique-duplicate-record\delete-duplicate.md`
+
+```sql
+SELECT DISTINCT email
+FROM employees;
+```
+
+```sql
+| email       |
+|-------------|
+| a@gmail.com |
+| b@gmail.com |
+| c@gmail.com |
+| d@gmail.com |
+```
+
+```sql
+SELECT DISTINCT ON (email) *
+FROM employees
+ORDER BY email;
+```
+
+- All the records only once even if duplicated by removing duplicated(extra) rows.
+
+```sql
+| id | name  | email       |
+|----|-------|-------------|
+| 1  | Alice | a@gmail.com |
+| 2  | Bob   | b@gmail.com |
+| 3  | Carol | c@gmail.com |
+| 5  | David | d@gmail.com |
+```
+
+##### 🟦 Count
 
 ```sql
 SELECT COUNT(DISTINCT email)
 FROM employees;
 ```
 
-### ➡️ Remove Duplicate Records
-
-##### 🟦 Delete Using USING Clause(DELETE Duplicate records and Keep One Record)
-
-- `USING` is only in the Postgresql
-
 ```sql
-DELETE FROM employees e1
-USING employees e2
-WHERE e1.id > e2.id
-AND e1.email = e2.email;
-```
-
-- This keeps the lowest id and deletes others.
-
-##### 🟦 Delete Using EXISTS Operator(DELETE Duplicate records and Keep One Record)
-
-- Keep One Record and DELETE other duplicated record, so only unique record will be there after this query
-- `EXISTS` works for all the sql.
-
-```sql
-DELETE FROM employees e1
-WHERE EXISTS (
-    SELECT 1
-    FROM employees e2
-    WHERE e1.email = e2.email
-    AND e1.id > e2.id
-);
-```
-
-- This keeps the lowest id and deletes others.
-
-##### 🟦 Keep One Record (Using CTE + ROW_NUMBER())
-
-- Best and safest method in PostgreSQL
-
-```sql
-WITH ranked AS (
-    SELECT id,
-           ROW_NUMBER() OVER (PARTITION BY email ORDER BY id) AS rn
-    FROM employees
-)
-DELETE FROM employees
-WHERE id IN (
-    SELECT id FROM ranked WHERE rn > 1
-);
-```
-
-- `PARTITION BY` email → groups duplicates
-- `ROW_NUMBER()` → assigns:
-- 1 to first row
-- 2,3,4... to duplicates
-- `DELETE WHERE rn > 1` → deletes duplicates
-- Keeps only one record per email
-
-### ➡️ Finding the duplicated records in a table. How many duplicates records are there in the table
-
-##### 🟦 Way 1: Find duplicate values
-
-```sql
-SELECT email, COUNT(*) AS duplicate_count
-FROM users
-GROUP BY email
-HAVING COUNT(*) > 1;
-
-```
-
-##### 🟦 Way 2: Count total duplicate rows
-
-```sql
-SELECT SUM(cnt - 1) AS total_duplicates
-FROM (
-    SELECT COUNT(*) AS cnt
-    FROM users
-    GROUP BY email
-    HAVING COUNT(*) > 1
-) t;
-
-```
-
-##### 🟦 Way 3: Find full duplicate rows
-
-```sql
-  SELECT *
-FROM users u
-WHERE u.email IN (
-    SELECT email
-    FROM users
-    GROUP BY email
-    HAVING COUNT(*) > 1
-);
-
+| count |
+|-------|
+| 4     |
 ```
