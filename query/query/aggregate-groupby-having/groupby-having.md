@@ -2,7 +2,7 @@
 
 # ⏺️ Group By & Having
 
-## ➡️ GROUP BY
+### ➡️ GROUP BY
 
 - `GROUP BY` is used to combine rows having the same values in specified columns into groups.
 - Then we usually apply aggregate functions on each group.
@@ -16,7 +16,7 @@
 | 4   | D    | HR         | 45000  |
 | 5   | E    | IT         | 70000  |
 
-### 🟦 Find total salary per department.
+##### 🟦 Find total salary per department.
 
 ```sql
 SELECT department, SUM(salary) AS total_salary
@@ -45,7 +45,7 @@ GROUP BY department;
 | IT         | 180000       |
 | HR         | 85000        |
 
-### 🟦 Very Important Rule of GROUP BY 🔴
+##### 🟦 Very Important Rule of GROUP BY 🔴
 
 - If you use `GROUP BY`, every column in `SELECT` must either:
   - Be inside an aggregate function
@@ -67,25 +67,23 @@ GROUP BY department;
 
 - This is correct because **department** is included in the `Group By` and **salary** inside the Aggregate function `MAX()`
 
-## ➡️ Having
+### ➡️ Having
 
 - `HAVING` is used to filter groups after grouping happens.
 
-### 🟦 WHERE vs HAVING
+##### 🟦 WHERE vs HAVING
 
-##### WHERE
+- WHERE
+  - Filters rows
+  - Runs before GROUP BY
+  - Cannot use aggregate functions
 
-- Filters rows
-- Runs before GROUP BY
-- Cannot use aggregate functions
+- HAVING
+  - Filters groups
+  - Runs after GROUP BY
+  - Can use aggregate functions
 
-##### HAVING
-
-- Filters groups
-- Runs after GROUP BY
-- Can use aggregate functions
-
-### 🟦 Show departments where total salary is greater than 100000.
+##### 🟦 Show departments where total salary is greater than 100000.
 
 ```sql
 SELECT department, SUM(salary) AS total_salary
@@ -98,7 +96,7 @@ HAVING SUM(salary) > 100000;
 
 ```
 
-### 🟦 Can We Use WHERE + GROUP BY + HAVING Together?
+##### 🟦 Can We Use WHERE + GROUP BY + HAVING Together?
 
 - YES, Show departments where:
   - Salary > 45000 (row filtering)
@@ -113,7 +111,7 @@ HAVING SUM(salary) > 100000;
 
 ```
 
-### 🟦 Find departments having more than 2 employees.
+##### 🟦 Find departments having more than 2 employees.
 
 - Interview Important
 
@@ -125,3 +123,73 @@ HAVING COUNT(*) > 2;
 ```
 
 - Here two column **department** and **emp_count** (`COUNT(*)` provide the count).
+
+### ➡️ Some Important Questions
+
+- employee table
+
+```sql
+| emp_name | department | salary |
+| -------- | ---------- | ------ |
+| Ali      | IT         | 70000  |
+| Ahmed    | IT         | 90000  |
+| Sara     | HR         | 60000  |
+| John     | HR         | 75000  |
+```
+
+##### 🟦 Department-wise Maximum Salary Query
+
+```sql
+SELECT department,
+       MAX(salary) AS max_salary
+FROM employee
+GROUP BY department;
+```
+
+- Output
+
+```sql
+| department | max_salary |
+| ---------- | ---------- |
+| IT         | 90000      |
+| HR         | 75000      |
+
+```
+
+- To get employee name also
+
+```sql
+SELECT emp_name,
+       department,
+       salary
+FROM (
+    SELECT emp_name,
+           department,
+           salary,
+           DENSE_RANK() OVER(
+               PARTITION BY department
+               ORDER BY salary DESC
+           ) AS rnk
+    FROM employee
+) t
+WHERE rnk = 1;
+```
+
+##### 🟦 Count Employees Department-wise
+
+```sql
+SELECT department,
+       COUNT(*) AS employee_count
+FROM employee
+GROUP BY department;
+```
+
+- Output
+
+```sql
+| department | employee_count |
+| ---------- | -------------- |
+| IT         | 5              |
+| HR         | 3              |
+
+```
