@@ -12,7 +12,6 @@
 | 5  | David | d@gmail.com |
 | 6  | Carol | c@gmail.com |
 | 7  | Carol | c@gmail.com |
-
 ```
 
 ### ➡️ removing duplicated(extra) rows (Get Only Distinct email values)
