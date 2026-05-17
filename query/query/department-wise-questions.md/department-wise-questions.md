@@ -44,9 +44,7 @@ GROUP BY department;
 ##### 🟦 To get employee name also
 
 ```sql
-SELECT emp_name,
-       department,
-       salary
+SELECT emp_name, department, salary
 FROM (
     SELECT emp_name,
            department,
@@ -60,6 +58,15 @@ FROM (
 WHERE rnk = 1;
 ```
 
+```sql
+| emp_name | department | salary |
+| -------- | ---------- | ------ |
+| A        | IT         | 100000 |
+| B        | IT         | 100000 |
+| F        | HR         | 95000  |
+| G        | HR         | 95000  |
+```
+
 ### ➡️ Department-wise Second Highest Salary Query
 
 ##### 🟦 Using DENSE_RANK()
@@ -67,13 +74,9 @@ WHERE rnk = 1;
 - All the second highest salary
 
 ```sql
-SELECT emp_name,
-       department,
-       salary
+SELECT emp_name, department, salary
 FROM (
-    SELECT emp_name,
-           department,
-           salary,
+    SELECT emp_name, department, salary,
            DENSE_RANK() OVER(
                PARTITION BY department
                ORDER BY salary DESC
@@ -100,13 +103,9 @@ WHERE rnk = 2;
 - Only the distinct second highest row
 
 ```sql
-SELECT emp_name,
-       department,
-       salary
+SELECT emp_name, department, salary
 FROM (
-    SELECT emp_name,
-           department,
-           salary,
+    SELECT emp_name, department, salary,
            ROW_NUMBER() OVER(
                PARTITION BY department
                ORDER BY salary DESC
